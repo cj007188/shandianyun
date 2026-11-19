@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script>
+(function(){
+  var ok=true;
+  try{ new Function("let a=1;const b=2;class C{};(x)=>x;Object.assign({},{});")(); }catch(e){ ok=false; }
+  if(ok) return;
+  document.addEventListener("DOMContentLoaded",function(){
+    var w=document.getElementById("legacyWarn"); if(!w) return;
+    w.style.display="block";
+    Array.prototype.forEach.call(document.body.children,function(n){ if(n!==w) n.style.display="none"; });
+  });
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#f3f6fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070c15" media="(prefers-color-scheme: dark)">
+<title>闪电云 · 域名邮箱体检（本地版）</title>
+<meta name="description" content="输入域名，10 秒看清客户用的是谁家企业邮箱、SPF/DMARC/DKIM 配置有没有毛病。">
+
+<!-- 加到手机桌面后全屏运行，像原生 App -->
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="域名体检">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f3f6fc;--bg2:#e9eff9;--card:#fff;--card2:#f8fafd;
+  --tx:#0d1526;--tx2:#5a6b85;--tx3:#93a2b8;
+  --line:#e2e9f4;--line2:#edf2f9;
+  --brand:#3b6ef6;--brand2:#7c5cff;
+  --ok:#0da97a;--warn:#f59e0b;--err:#ef4444;--info:#0ea5e9;
+  --shadow:0 1px 2px rgba(13,21,38,.04),0 10px 28px -12px rgba(13,21,38,.14);
+  --r:16px;--r2:12px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --bar:rgba(243,246,252,.84);
+  --tagbg:rgba(59,110,246,.10);
+  --warnbg:rgba(245,158,11,.12);--warnbd:rgba(245,158,11,.30);--warntx:#a06a06;
+  --errbg:rgba(239,68,68,.10);--errbd:rgba(239,68,68,.26);
+  --okbg:rgba(13,169,122,.12);
+  --amberbg:rgba(245,158,11,.16);--ambertx:#b0730a;
+  --softbg:rgba(59,110,246,.07);--softbd:rgba(59,110,246,.20);
+}
+[data-theme=dark]{
+  --bg:#070c15;--bg2:#0a1120;--card:#101a2b;--card2:#0c1523;
+  --tx:#e9effb;--tx2:#93a4bf;--tx3:#64768f;
+  --line:#1d2b42;--line2:#162135;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.75);
+  --bar:rgba(7,12,21,.86);
+  --tagbg:rgba(59,110,246,.18);
+  --warnbg:rgba(245,158,11,.14);--warnbd:rgba(245,158,11,.32);--warntx:#f4b740;
+  --errbg:rgba(239,68,68,.13);--errbd:rgba(239,68,68,.32);
+  --okbg:rgba(13,169,122,.16);
+  --amberbg:rgba(245,158,11,.18);--ambertx:#fbbf24;
+  --softbg:rgba(59,110,246,.14);--softbd:rgba(59,110,246,.28);
+}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--tx);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(72px + var(--safe-b));
+  transition:background .25s,color .25s;
+  min-height:100vh;
+}
+body.wxwork{padding-bottom:calc(66px + var(--safe-b))}
+.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:inherit;color:inherit}
+a{color:var(--brand);text-decoration:none}
+
+/* ---- top bar ---- */
+.bar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;
+  background:var(--bar);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line2);
+}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:.2px}
+.brand .mark{
+  width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  box-shadow:0 4px 12px -4px rgba(59,110,246,.6);
+}
+.brand .mark svg{width:15px;height:15px;display:block}
+.brand i{font-style:normal;font-weight:500;font-size:13px;color:var(--tx3);padding-left:8px;margin-left:2px;border-left:1px solid var(--line);line-height:1}
+.iconbtn{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--tx2);border:1px solid var(--line);background:var(--card)}
+.iconbtn:active{transform:scale(.94)}
+.iconbtn svg{width:17px;height:17px}
+
+/* ---- layout ---- */
+main{max-width:660px;margin:0 auto;padding:0 14px}
+.view{display:none;animation:fade .28s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---- hero ---- */
+.hero{padding:22px 2px 14px}
+.hero h1{margin:0;font-size:25px;line-height:1.25;font-weight:800;letter-spacing:-.4px}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg,var(--brand),var(--brand2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{margin:8px 0 0;font-size:13.5px;color:var(--tx2);line-height:1.6}
+
+/* ---- search ---- */
+.searchbox{display:flex;gap:8px;margin-top:4px}
+.searchbox .fld{
+  flex:1;position:relative;display:flex;align-items:center;
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+  padding:0 12px;height:52px;transition:border-color .18s,box-shadow .18s;
+}
+.searchbox .fld:focus-within{border-color:var(--brand);box-shadow:0 0 0 4px rgba(59,110,246,.13)}
+.searchbox .fld svg{width:17px;height:17px;color:var(--tx3);flex:none;margin-right:8px}
+.searchbox input{
+  flex:1;border:none;outline:none;background:none;font-size:16px;
+  min-width:0;letter-spacing:.2px;
+}
+.searchbox input::placeholder{color:var(--tx3);font-size:14.5px}
+.btn-primary{
+  height:52px;padding:0 20px;border-radius:14px;font-weight:700;font-size:15px;color:#fff;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  box-shadow:0 8px 22px -8px rgba(59,110,246,.55);
+  transition:transform .12s,opacity .2s;white-space:nowrap;
+}
+.btn-primary:active{transform:scale(.97)}
+.btn-primary[disabled]{opacity:.55;pointer-events:none}
+.btn-ghost{
+  height:44px;padding:0 16px;border-radius:12px;font-weight:600;font-size:14px;
+  border:1px solid var(--line);background:var(--card);color:var(--tx2);
+}
+/* 加到桌面引导 */
+.insbar{
+  position:fixed;left:12px;right:12px;bottom:calc(74px + var(--safe-b));z-index:70;
+  display:flex;align-items:center;gap:10px;padding:11px 12px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 10px 30px -12px rgba(13,21,38,.28);
+  transform:translateY(140%);transition:transform .38s cubic-bezier(.22,1,.36,1);
+}
+.insbar.on{transform:translateY(0)}
+.insbar .ii{
+  width:34px;height:34px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+}
+.insbar .it{flex:1;min-width:0}
+.insbar .it b{display:block;font-size:12.5px;font-weight:700;color:var(--tx);line-height:1.35}
+.insbar .it span{display:block;font-size:11px;color:var(--tx2);line-height:1.4;margin-top:1px}
+.insbar .ix{
+  flex:0 0 auto;border:0;background:transparent;color:var(--tx3);font-size:19px;
+  line-height:1;padding:4px 2px;font-family:inherit;
+}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.chip{
+  font-size:12.5px;padding:6px 11px;border-radius:999px;color:var(--tx2);
+  background:var(--card);border:1px solid var(--line);
+}
+.chip:active{background:var(--line2)}
+.chip b{color:var(--brand);font-weight:600}
+
+/* ---- 线路状态 ---- */
+.linebar{
+  display:flex;align-items:center;gap:7px;margin-top:11px;
+  font-size:11.5px;color:var(--tx3);line-height:1.4;
+}
+.linebar .ld{width:6px;height:6px;border-radius:50%;background:var(--tx3);flex:none}
+.linebar .ld.ok{background:var(--ok);box-shadow:0 0 0 3px var(--okbg)}
+.linebar .ld.bad{background:var(--err);box-shadow:0 0 0 3px var(--errbg)}
+.linebar .ld.mid{background:var(--warn)}
+.linebar b{color:var(--tx2);font-weight:600}
+.linebar .lk{margin-left:auto;color:var(--brand);font-size:11.5px;font-weight:650;padding:2px 0 2px 8px}
+.linepanel{
+  margin-top:10px;border:1px solid var(--line);border-radius:var(--r2);
+  background:var(--card);box-shadow:var(--shadow);overflow:hidden;animation:fade .2s ease;
+}
+.lp-h{padding:10px 13px;border-bottom:1px solid var(--line2);font-size:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.lp-h span{font-weight:500;color:var(--tx3);font-size:11px}
+.lp-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(--line2);font-size:12.5px}
+.lp-row:last-child{border-bottom:none}
+.lp-row .nm{flex:1;min-width:0}
+.lp-row .nm em{font-style:normal;font-size:10.5px;color:var(--tx3);display:block;margin-top:1px}
+.lp-row .nm .using{font-size:9.5px;font-weight:700;color:var(--ok);background:var(--okbg);padding:1px 5px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.lp-row .st{font-size:11px;font-weight:650;flex:none;font-variant-numeric:tabular-nums}
+.lp-row .st.ok{color:var(--ok)}
+.lp-row .st.bad{color:var(--err)}
+.lp-row .st.mid{color:var(--warn)}
+.lp-row .st.idle{color:var(--tx3)}
+.lp-row button{font-size:11px;font-weight:650;color:var(--brand);padding:4px 8px;border-radius:6px;background:var(--tagbg);flex:none}
+.lp-row button.on{background:var(--brand);color:#fff}
+.lp-foot{padding:9px 13px;font-size:11px;color:var(--tx3);line-height:1.6;background:var(--card2)}
+
+/* ---- card ---- */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:16px;margin-top:14px;animation:rise .35s ease both;
+}
+.card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.card-h h2{margin:0;font-size:14px;font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:7px}
+.card-h h2 .bar-ic{width:3px;height:14px;border-radius:2px;background:linear-gradient(var(--brand),var(--brand2))}
+.card-h .hint{font-size:11.5px;color:var(--tx3)}
+
+/* ---- vendor card ---- */
+.vcard{
+  position:relative;overflow:hidden;margin-top:16px;border-radius:18px;padding:18px;
+  color:#fff;animation:rise .35s ease both;
+  background:linear-gradient(135deg,var(--vc1,#475569),var(--vc2,#64748b));
+  box-shadow:0 14px 34px -16px rgba(13,21,38,.42);
+}
+.vcard:before{
+  content:"";position:absolute;right:-40px;top:-60px;width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,.13);
+}
+.vcard:after{
+  content:"";position:absolute;right:20px;bottom:-70px;width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+.vc-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:14px}
+.vc-lab{font-size:11.5px;opacity:.82;letter-spacing:1.2px;font-weight:600;text-transform:uppercase}
+.vc-name{font-size:21px;font-weight:800;margin-top:5px;letter-spacing:-.3px;line-height:1.25}
+.vc-sub{font-size:12px;opacity:.85;margin-top:6px;line-height:1.5}
+.vc-dom{font-size:12px;opacity:.75;margin-top:2px;word-break:break-all}
+.ringwrap{position:relative;width:72px;height:72px;flex:none}
+.ring{width:72px;height:72px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:7;stroke-linecap:round}
+.ring .bgc{stroke:rgba(255,255,255,.22)}
+.ring .fgc{stroke:#fff;transition:stroke-dashoffset 1s cubic-bezier(.2,.9,.2,1)}
+.ringtxt{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  font-weight:800;font-size:20px;letter-spacing:-.5px;line-height:1;
+}
+.ringtxt small{display:block;font-size:9px;font-weight:600;opacity:.7;letter-spacing:.3px;margin-top:0;line-height:1}
+.vc-mx{
+  position:relative;z-index:1;margin-top:14px;padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.2);font-size:12px;line-height:1.7;
+  display:flex;flex-wrap:wrap;gap:4px 12px;
+}
+.vc-mx span{opacity:.9;word-break:break-all}
+.vc-mx b{font-weight:700;opacity:.7;margin-right:3px}
+
+/* ---- check list ---- */
+.chk{
+  display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line2);
+  align-items:flex-start;cursor:pointer;
+}
+.chk:last-child{border-bottom:none;padding-bottom:2px}
+.chk:first-of-type{padding-top:2px}
+.dot{
+  width:19px;height:19px;border-radius:50%;flex:none;margin-top:1px;
+  display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;
+}
+.dot.ok{background:var(--ok)}
+.dot.warn{background:var(--warn)}
+.dot.err{background:var(--err)}
+.dot.info{background:var(--info)}
+.dot svg{width:11px;height:11px}
+.chk-main{flex:1;min-width:0}
+.chk-t{font-size:13.5px;font-weight:650;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.chk-t .tag{
+  font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;letter-spacing:.3px;
+  background:var(--line2);color:var(--tx2);
+}
+.chk-d{font-size:12px;color:var(--tx2);margin-top:3px;line-height:1.55;word-break:break-all}
+.chk-d code{
+  font-family:ui-monospace,Consolas,monospace;font-size:11.5px;
+  background:var(--card2);border:1px solid var(--line2);border-radius:5px;padding:1px 5px;
+  word-break:break-all;
+}
+.chk-v{font-size:11px;font-weight:700;color:var(--tx3);flex:none;padding-top:2px;font-variant-numeric:tabular-nums}
+.chk-adv{
+  margin-top:8px;padding:9px 11px;border-radius:9px;font-size:12px;line-height:1.6;
+  background:var(--card2);border-left:2.5px solid var(--brand);color:var(--tx2);
+  display:none;
+}
+.chk.open .chk-adv{display:block;animation:fade .2s ease}
+.chk-adv b{color:var(--tx);font-weight:700}
+
+/* ---- records ---- */
+.rtabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin:0 -16px 10px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.rtabs::-webkit-scrollbar{display:none}
+.rtab{
+  font-size:12px;font-weight:600;padding:5px 11px;border-radius:8px;white-space:nowrap;
+  color:var(--tx2);background:var(--card2);border:1px solid var(--line2);
+}
+.rtab.on{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent}
+.rrow{
+  display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line2);
+  font-size:12.5px;
+}
+.rrow:last-child{border-bottom:none}
+.rtype{
+  font-size:10px;font-weight:800;letter-spacing:.4px;padding:2px 6px;border-radius:5px;
+  background:var(--tagbg);color:var(--brand);
+  flex:none;margin-top:1px;min-width:44px;text-align:center;
+}
+.rdata{
+  flex:1;min-width:0;word-break:break-all;line-height:1.5;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;
+}
+.rttl{font-size:10.5px;color:var(--tx3);flex:none;font-variant-numeric:tabular-nums;padding-top:2px}
+.rempty{font-size:12.5px;color:var(--tx3);padding:14px 0;text-align:center}
+
+/* ---- score bar ---- */
+.meter{display:flex;gap:2px;margin-top:10px}
+.meter i{height:4px;flex:1;border-radius:2px;background:var(--line)}
+
+/* ---- skeleton ---- */
+.sk{background:linear-gradient(90deg,var(--line2) 25%,var(--card2) 50%,var(--line2) 75%);background-size:200% 100%;animation:shim 1.2s infinite;border-radius:8px}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ---- batch ---- */
+textarea{
+  width:100%;min-height:120px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--card);padding:12px;font-size:14px;line-height:1.7;outline:none;resize:vertical;
+}
+textarea:focus{border-color:var(--brand)}
+.brow{
+  display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line2);
+}
+.brow:last-child{border-bottom:none}
+.brow .bd{flex:1;min-width:0}
+.brow .bd .n{font-size:13.5px;font-weight:650;word-break:break-all}
+.brow .bd .s{font-size:11.5px;color:var(--tx2);margin-top:2px}
+.bs{
+  font-size:13px;font-weight:800;width:38px;height:38px;border-radius:10px;flex:none;
+  display:grid;place-items:center;font-variant-numeric:tabular-nums;
+}
+.bs.g{background:var(--okbg);color:var(--ok)}
+.bs.y{background:var(--amberbg);color:var(--ambertx)}
+.bs.r{background:var(--errbg);color:var(--err)}
+.bs.n{background:var(--line2);color:var(--tx3)}
+
+/* ---- history ---- */
+.hrow{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line2)}
+.hrow:last-child{border-bottom:none}
+.hrow .hd{flex:1;min-width:0}
+.hrow .hn{font-size:13.5px;font-weight:650;word-break:break-all}
+.hrow .hs{font-size:11.5px;color:var(--tx3);margin-top:2px}
+.hrow .hd2{display:flex;align-items:center;gap:5px}
+.hd2 .dotx{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.hdel{color:var(--tx3);font-size:12px;padding:4px 6px}
+
+/* ---- tabbar ---- */
+.tabbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  display:flex;justify-content:center;gap:0;
+  padding:6px 0 calc(6px + var(--safe-b));
+  background:var(--bar);
+  backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);
+  border-top:1px solid var(--line);
+}
+.tabbar .inner{display:flex;width:100%;max-width:660px;margin:0 auto}
+.tb{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;
+  color:var(--tx3);font-size:10.5px;font-weight:600;transition:color .18s;
+}
+.tb svg{width:21px;height:21px}
+.tb.on{color:var(--brand)}
+.tb:active{opacity:.7}
+
+/* ---- toast ---- */
+#toast{
+  position:fixed;left:50%;bottom:calc(90px + var(--safe-b));transform:translateX(-50%) translateY(20px);
+  background:rgba(15,23,42,.94);color:#fff;font-size:13px;font-weight:600;
+  padding:10px 18px;border-radius:11px;opacity:0;pointer-events:none;transition:.25s;z-index:99;
+  max-width:86vw;text-align:center;
+}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---- misc ---- */
+.foot{text-align:center;font-size:11px;color:var(--tx3);padding:26px 10px 10px;line-height:1.8}
+.row2{display:flex;gap:8px;margin-top:12px}
+.row2>*{flex:1}
+.mini{font-size:11.5px;color:var(--tx3);line-height:1.6}
+.warnbox{
+  background:var(--warnbg);
+  border:1px solid var(--warnbd);
+  color:var(--warntx);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.6;margin-top:12px;
+}
+[data-theme=dark] .warnbox{color:#fbbf24}
+.errbox{
+  background:var(--errbg);
+  border:1px solid var(--errbd);
+  color:var(--err);border-radius:10px;padding:12px;font-size:12.5px;line-height:1.6;margin-top:14px;
+}
+.live{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--tx3);font-weight:600}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}
+.copybtn{color:var(--tx3);font-size:11px;padding:2px 5px;border-radius:5px;flex:none}
+.copybtn:active{background:var(--line2)}
+</style>
+<style>#offTag{font-size:10px;font-weight:700;color:var(--tx3);background:var(--card2);border:1px solid var(--line);padding:2px 6px;border-radius:5px;margin-left:6px;letter-spacing:.3px;line-height:1.4;white-space:nowrap}</style>
+</head>
+<body>
+<div id="legacyWarn" style="display:none;max-width:560px;margin:72px auto;padding:0 26px;font:16px/1.85 -apple-system,BlinkMacSystemFont,Microsoft YaHei,sans-serif;color:#0d1526"><h2 style="font-size:21px;margin:0 0 14px">需要用现代浏览器打开</h2><p style="margin:0 0 10px">这个文件用到了较新的浏览器能力，当前打开它的浏览器太旧了（多半是 IE 内核）。</p><p style="margin:0"><b>怎么解决：</b>右键这个文件 &rarr;「打开方式」&rarr; 选 <b>Chrome</b>、<b>Edge</b> 或 <b>360极速浏览器</b>。</p></div>
+
+<header class="bar">
+  <div class="brand">
+    <span class="mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2Z" fill="#fff"/></svg>
+    </span>
+    <span>闪电云</span><i>域名邮箱体检</i><b id="offTag">本地版</b>
+  </div>
+  <button class="iconbtn" id="themeBtn" aria-label="切换主题">
+    <svg id="icoSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
+    <svg id="icoMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+  </button>
+</header>
+
+<main>
+  <!-- ============ 体检 ============ -->
+  <section class="view active" id="v-query">
+    <div class="hero">
+      <h1>客户域名<em>邮箱体检</em></h1>
+      <p>输入域名，实时拉真实解析：现在用谁家邮箱、SPF/DMARC/DKIM 有没有过关、从哪儿切入最合适。</p>
+    </div>
+
+    <div class="searchbox">
+      <label class="fld">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="domainInput" placeholder="输入客户域名，如 example.com" autocomplete="off" spellcheck="false" inputmode="url" enterkeyhint="search">
+      </label>
+      <button class="btn-primary" id="goBtn">体检</button>
+    </div>
+    <div class="chips" id="chips"></div>
+
+    <div class="linebar" id="lineBar">
+      <span class="ld"></span>
+      <span id="lineTxt">线路检测中…</span>
+      <button class="lk" id="lineBtn">线路详情</button>
+    </div>
+    <div id="linePanelHost"></div>
+
+    <div id="qResult"></div>
+    <div class="foot" id="footNote">实时数据来自公共 DNS（阿里 / Cloudflare / 腾讯）<br>不做缓存复用，每次都是当前解析结果</div>
+  </section>
+
+  <!-- ============ 批量 ============ -->
+  <section class="view" id="v-batch">
+    <div class="hero" style="padding-bottom:16px">
+      <h1>批量<em>客户体检</em></h1>
+      <p>粘贴一串域名（换行或逗号分隔），一次跑完，直接出客户邮箱现状清单。</p>
+    </div>
+    <div class="card" style="margin-top:0">
+      <textarea id="batchInput" placeholder="example.com&#10;abc.com.cn&#10;客户三：xxx.net"></textarea>
+      <div class="row2">
+        <button class="btn-primary" id="batchGo">开始批量体检</button>
+        <button class="btn-ghost" id="batchClear">清空</button>
+      </div>
+      <div class="mini" style="margin-top:10px">建议单次 ≤ 20 个，多了会被公共 DNS 限速。跑完可导出 CSV。</div>
+    </div>
+    <div id="batchResult"></div>
+  </section>
+
+  <!-- ============ 历史 ============ -->
+  <section class="view" id="v-hist">
+    <div class="hero" style="padding-bottom:16px">
+      <h1>查询<em>记录</em></h1>
+      <p>本机保存，不上传。点一下回到当时的体检结果。</p>
+    </div>
+    <div class="card" style="margin-top:0" id="histCard">
+      <div class="card-h"><h2><span class="bar-ic"></span>最近查询</h2><button class="hdel" id="histClear">清空</button></div>
+      <div id="histList"></div>
+    </div>
+  </section>
+</main>
+<div class="insbar" id="insBar">
+  <span class="ii">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10m0 0 3.5-3.5M12 13 8.5 9.5"/><path d="M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg>
+  </span>
+  <div class="it">
+    <b id="insTitle">加到手机桌面</b>
+    <span id="insDesc">下次一点就开，不用每次找链接</span>
+  </div>
+  <button class="ix" id="insClose" aria-label="关闭">&times;</button>
+</div>
+
+
+<nav class="tabbar">
+  <div class="inner">
+    <button class="tb on" data-view="v-query">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l2.5-7 4 14L16 12h5"/></svg>
+      <span>体检</span>
+    </button>
+    <button class="tb" data-view="v-batch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="4.5" width="17" height="4" rx="1.4"/><rect x="3.5" y="15.5" width="17" height="4" rx="1.4"/><path d="M6.5 12h11"/></svg>
+      <span>批量</span>
+    </button>
+    <button class="tb" data-view="v-hist">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+      <span>记录</span>
+    </button>
+  </div>
+</nav>
+
+<div id="toast"></div>
+
+<script>
+/* ==========================================================
+   闪电云 · 域名邮箱体检
+   纯前端 + 公共 DNS over HTTPS，实时查询真实解析
+   ========================================================== */
+(function(){
+'use strict';
+
+/* ---------------- 基础设施 ---------------- */
+var LS={
+  get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},
+  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},
+  del:function(k){try{localStorage.removeItem(k);}catch(e){}}
+};
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+var toastTimer=null;
+function toast(msg){
+  var el=$('#toast'); el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastTimer); toastTimer=setTimeout(function(){el.classList.remove('on');},1700);
+}
+function copyText(t){
+  var done=function(){toast('已复制');};
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(done).catch(function(){fallback();});
+  } else fallback();
+  function fallback(){
+    try{
+      var ta=document.createElement('textarea');
+      ta.value=t; ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      document.execCommand('copy'); ta.remove(); done();
+    }catch(e){toast('复制失败，请长按选择');}
+  }
+}
+
+/* ---------------- 主题 ---------------- */
+(function initTheme(){
+  var saved=LS.get('sd_theme',null);
+  var sys=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var t=saved||(sys?'dark':'light');
+  document.documentElement.setAttribute('data-theme',t);
+  syncIcon(t);
+  $('#themeBtn').addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var nxt=cur==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',nxt);
+    LS.set('sd_theme',nxt); syncIcon(nxt);
+  });
+  function syncIcon(t){
+    $('#icoSun').style.display=t==='dark'?'none':'block';
+    $('#icoMoon').style.display=t==='dark'?'block':'none';
+  }
+})();
+
+/* ---------------- 企业微信适配 ---------------- */
+(function(){
+  var ua=navigator.userAgent||'';
+  if(/wxwork/i.test(ua)) document.body.classList.add('wxwork');
+})();
+
+/* ==========================================================
+   DNS 引擎
+   ========================================================== */
+var TNUM={A:1,NS:2,CNAME:5,SOA:6,PTR:12,MX:15,TXT:16,AAAA:28,SRV:33,CAA:257};
+var TNAME={1:'A',2:'NS',5:'CNAME',6:'SOA',12:'PTR',15:'MX',16:'TXT',28:'AAAA',33:'SRV',257:'CAA'};
+
+/* ================= 线路池 =================
+   同一上游多个独立入口 + 备用上游 + 可选自有代理。
+   任一条可用即可查询，全部失败才报错。
+   ========================================= */
+var LINES=[
+  {id:'ali',     name:'阿里云 · 主线路',  host:'dns.alidns.com',     url:'https://dns.alidns.com/resolve',       prio:1, note:'域名入口，默认首选'},
+  {id:'ali-ip1', name:'阿里云 · 备线 1',  host:'223.5.5.5',          url:'https://223.5.5.5/resolve',            prio:2, note:'IP 直连，绕过域名解析故障'},
+  {id:'ali-ip2', name:'阿里云 · 备线 2',  host:'223.6.6.6',          url:'https://223.6.6.6/resolve',            prio:3, note:'IP 直连，独立节点'},
+  {id:'cf',      name:'Cloudflare',       host:'cloudflare-dns.com', url:'https://cloudflare-dns.com/dns-query', prio:4, note:'境外线路，部分网络不可达'},
+  {id:'local',   name:'自有代理（后端）', host:'/api/dns',           url:'/api/dns',                             prio:0, note:'部署后端后自动启用', hidden:true}
+];
+
+var health={};
+LINES.forEach(function(l){ health[l.id]={state:'unknown',ms:0,fails:0,until:0,last:0}; });
+var lockId=null;
+var bavail=false;
+
+function lineById(id){ for(var i=0;i<LINES.length;i++) if(LINES[i].id===id) return LINES[i]; return null; }
+/* 托管平台可能要求分享码，所有自有接口请求自动带上 */
+function shareQS(){
+  try{
+    var m=/[?&]sharecode=([^&]+)/.exec(location.search||'');
+    return m?('&sharecode='+m[1]):'';
+  }catch(e){ return ''; }
+}
+function usableLines(){
+  return LINES.filter(function(l){
+    if(l.hidden && !(l.id==='local'&&bavail)) return false;
+    if(l.id==='local') return bavail;
+    var h=health[l.id];
+    return !(h.state==='bad' && Date.now()<h.until);
+  }).sort(function(a,b){
+    /* 后端代理可用时永远优先：它能直连系统 DNS，最准 */
+    if(a.id==='local'&&b.id!=='local') return -1;
+    if(b.id==='local'&&a.id!=='local') return 1;
+    var ha=health[a.id],hb=health[b.id];
+    var ra=ha.state==='ok'?0:ha.state==='mid'?1:2;
+    var rb=hb.state==='ok'?0:hb.state==='mid'?1:2;
+    if(ra!==rb) return ra-rb;
+    if(ha.ms!==hb.ms) return ha.ms-hb.ms;
+    return a.prio-b.prio;
+  });
+}
+function bestLine(){ var u=usableLines(); return u.length?u[0]:null; }
+function markOk(id,ms){ var h=health[id]; if(!h) return; h.state='ok'; h.ms=ms; h.fails=0; h.until=0; h.last=Date.now(); }
+function markFail(id){
+  var h=health[id]; if(!h) return;
+  h.fails++; h.last=Date.now();
+  if(h.fails>=2){ h.state='bad'; h.until=Date.now()+60000; }
+  else if(h.state!=='ok'){ h.state='mid'; }
+}
+
+/* ---- 缓存 ---- */
+var dnsCache=new Map();
+function cacheKey(lineId,name,type){ return lineId+'|'+String(name).toLowerCase()+'|'+type; }
+function cacheGet(k){
+  var v=dnsCache.get(k);
+  if(v && v.exp>Date.now()) return v.data;
+  if(v) dnsCache.delete(k);
+  return null;
+}
+function cacheSet(k,d,ttl){
+  if(dnsCache.size>1200) dnsCache.clear();
+  dnsCache.set(k,{data:d,exp:Date.now()+Math.max(20,Math.min(ttl||60,600))*1000});
+}
+
+/* ---- 单线请求 ---- */
+function fetchLine(line,name,type,timeout){
+  var ck=cacheKey(line.id,name,type);
+  var hit=cacheGet(ck);
+  if(hit) return Promise.resolve(hit);
+
+  var t0=Date.now();
+  var ctrl=('AbortController' in window)?new AbortController():null;
+  var tm=null;
+  var url = (line.id==='local')
+    ? '/api/dns?name='+encodeURIComponent(name)+'&type='+type+shareQS()
+    : line.url+'?name='+encodeURIComponent(name)+'&type='+type;
+
+  var p=new Promise(function(res,rej){
+    if(ctrl) tm=setTimeout(function(){ ctrl.abort(); }, timeout||6500);
+    fetch(url,{headers:{'accept':'application/dns-json'},signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(res).catch(rej);
+  });
+
+  return p.then(function(j){
+    if(!j || (j.Status===undefined && !j.Answer)) throw new Error('BAD_RESPONSE');
+    markOk(line.id, Date.now()-t0);
+    var ttl=60;
+    if(j.Answer && j.Answer.length){
+      var m=Infinity;
+      j.Answer.forEach(function(a){ if(a.TTL&&a.TTL<m) m=a.TTL; });
+      if(m!==Infinity) ttl=m;
+    }
+    cacheSet(ck,j,ttl);
+    return j;
+  }).catch(function(e){
+    markFail(line.id);
+    throw e;
+  }).then(function(v){ if(tm) clearTimeout(tm); return v; }, function(e){ if(tm) clearTimeout(tm); throw e; });
+}
+
+/* ---- 主查询：自动切换 ---- */
+function dnsQuery(name,type,opts){
+  opts=opts||{};
+  var pool;
+  if(opts.rid){ var one=lineById(opts.rid); pool=one?[one]:[]; }
+  else if(lockId){ var lk=lineById(lockId); pool=lk?[lk]:[]; }
+  else{
+    pool=usableLines();
+    if(!pool.length){ var fb=lineById('ali'); pool=fb?[fb]:[]; }
+  }
+  if(!pool.length) return Promise.reject(new Error('NO_LINE'));
+
+  var i=0, tried=[];
+  function next(){
+    if(i>=pool.length){
+      var err=new Error('ALL_LINES_FAILED');
+      err.tried=tried;
+      return Promise.reject(err);
+    }
+    var L=pool[i++];
+    return fetchLine(L,name,type,opts.timeout).catch(function(e){
+      tried.push(L.name);
+      if(opts.rid||lockId) throw e;
+      return next();
+    });
+  }
+  return next();
+}
+
+/* ---- 健康探测 ---- */
+function healthCheck(){
+  var pool=LINES.filter(function(l){ return l.id!=='local'; });
+  var probe='probe-'+Math.random().toString(36).slice(2,8)+'.test';
+  return Promise.all(pool.map(function(L){
+    return fetchLine(L,probe,'A',4500).catch(function(){});
+  })).then(function(){ renderLineBar(); });
+}
+function probeBackend(){
+  var t0=Date.now();
+  return fetch('/api/dns?name=example.com&type=A'+shareQS(),{headers:{'accept':'application/dns-json'}})
+    .then(function(r){ if(!r.ok) throw new Error('no'); return r.json(); })
+    .then(function(j){
+      if(j && (j.Status!==undefined||j.Answer)){ bavail=true; health.local.state='ok'; health.local.ms=Date.now()-t0; }
+    })
+    .catch(function(){ bavail=false; })
+    .then(function(){ renderLineBar(); });
+}
+
+/* 并发闸门 */
+function limiter(n){
+  var active=0,q=[];
+  function pump(){
+    if(active>=n||!q.length) return;
+    active++;
+    var t=q.shift();
+    t.fn().then(t.res,t.rej).then(function(){active--;pump();});
+  }
+  return function(fn){
+    return new Promise(function(res,rej){ q.push({fn:fn,res:res,rej:rej}); pump(); });
+  };
+}
+var limit=limiter(6);
+
+/* ---------------- 记录解析 ---------------- */
+function trimDot(s){ return String(s||'').replace(/\.$/,''); }
+function txtVal(d){
+  var s=String(d||'');
+  var parts=s.match(/"([^"]*)"/g);
+  if(parts&&parts.length) return parts.map(function(p){return p.slice(1,-1);}).join('');
+  return s;
+}
+function parseAnswers(j,typeNum){
+  var out=[];
+  if(!j) return out;
+  var arr=(j.Answer||[]).concat(j.Authority||[]);
+  arr.forEach(function(a){
+    if(!a||a.type===undefined) return;
+    if(a.type===6 && typeNum!==6) return; /* 没查到记录时返回 SOA，不算答案 */
+    out.push({
+      name:trimDot(a.name),
+      type:TNAME[a.type]||('T'+a.type),
+      ttl:a.TTL||0,
+      data:typeNum===16&&a.type===16?txtVal(a.data):a.data
+    });
+  });
+  return out;
+}
+function statusOf(j){
+  if(!j) return 'ERR';
+  if(j.Status===0) return 'NOERROR';
+  if(j.Status===3) return 'NXDOMAIN';
+  if(j.Status===2) return 'SERVFAIL';
+  return 'E'+j.Status;
+}
+
+/* ---------------- 域名清洗 ---------------- */
+function cleanDomain(v){
+  v=String(v||'').trim().toLowerCase();
+  if(!v) return '';
+  v=v.replace(/^https?:\/\//,'').replace(/^\/\//,'');
+  v=v.split('/')[0].split('?')[0].split('#')[0];
+  if(v.indexOf('@')>-1) v=v.split('@').pop();
+  v=v.replace(/:\d+$/,'').replace(/\.$/,'').replace(/^\*\./,'');
+  if(!/^[a-z0-9.\-]+$/.test(v)){
+    try{ v=new URL('http://'+v).hostname; }catch(e){}
+  }
+  return v;
+}
+function isValidDomain(d){
+  if(!d||d.length>253) return false;
+  if(!/^[a-z0-9]([a-z0-9\-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9\-]*[a-z0-9])?)+$/.test(d)) return false;
+  return /\./.test(d);
+}
+
+/* ==========================================================
+   指纹库：服务商识别
+   ========================================================== */
+var VENDORS=[
+  {key:'tencent', name:'腾讯企业邮', short:'腾讯',
+   vc1:'#0C7BFF', vc2:'#3DA5FF',
+   mx:[/^mxbiz\d*\.qq\.com$/i,/^cloudmx\.qq\.com$/i,/^mx\d*\.exmail\.qq\.com$/i,/^mx\d*\.qq\.com$/i],
+   spf:[/spf\.mail\.qq\.com/i,/spf\.qq\.com/i,/exmail\.qq\.com/i],
+   dkim:['dkim','s1','s2'],
+   tip:'腾讯企业邮（现并入企业微信邮箱）', site:'exmail.qq.com'},
+  {key:'aliyun', name:'阿里云企业邮箱', short:'阿里云',
+   vc1:'#FF6A00', vc2:'#FF9A3D',
+   mx:[/\.mail\.aliyun\.com$/i,/^mx\.aliyun\.com$/i,/^mxa\.mail\.aliyun\.com$/i],
+   spf:[/spf\.mail\.aliyun\.com/i,/spf\.aliyun\.com/i],
+   dkim:['s1','s2','aliyun','dkim'],
+   tip:'阿里云企业邮箱 / 钉钉邮箱', site:'mail.aliyun.com'},
+  {key:'netease-free', name:'网易免费邮箱', short:'网易个人',
+   vc1:'#B91C1C', vc2:'#EF4444',
+   mx:[/^(163|126)mx\d*\.mxmail\.netease\.com$/i,/^mx\d*\.163\.com$/i,/^mx\.mail\.163\.com$/i,/^mx\d*\.126\.com$/i,/^freemx\d*\.163\.com$/i],
+   spf:[/spf\.163\.com/i],
+   dkim:['dkim','s1'],
+   tip:'网易个人免费邮箱（非企业版，容量与管控都有限）', site:'mail.163.com'},
+  {key:'netease', name:'网易企业邮箱', short:'网易',
+   vc1:'#E11D48', vc2:'#FB5C74',
+   mx:[/\.qiye\.163\.com$/i,/\.mxmail\.netease\.com$/i,/\.qiye\.126\.com$/i],
+   spf:[/spf\.qiye\.163\.com/i,/spf\.qiye\.126\.com/i,/spf\.163\.com/i],
+   dkim:['dkim','s1','s2'],
+   tip:'网易企业邮箱（163/126 企业版）', site:'qiye.163.com'},
+  {key:'m365', name:'Microsoft 365', short:'微软',
+   vc1:'#0067C0', vc2:'#2B9BE0',
+   mx:[/\.mail\.protection\.outlook\.com$/i,/\.mail\.protection\.outlook\.de$/i],
+   spf:[/spf\.protection\.outlook\.com/i,/outlook\.com/i],
+   dkim:['selector1','selector2'],
+   tip:'Microsoft 365 / Exchange Online', site:'microsoft.com/microsoft-365'},
+  {key:'google', name:'Google Workspace', short:'谷歌',
+   vc1:'#1A73E8', vc2:'#34A853',
+   mx:[/^aspmx\d*\.l\.google\.com$/i,/^alt\d*\.aspmx\.l\.google\.com$/i,/\.googlemail\.com$/i],
+   spf:[/_spf\.google\.com/i,/google\.com/i],
+   dkim:['google','dkim','s1'],
+   tip:'Google Workspace（原 G Suite）', site:'workspace.google.com'},
+  {key:'coremail', name:'Coremail', short:'Coremail',
+   vc1:'#185FA8', vc2:'#3D8BD4',
+   mx:[/coremail/i],
+   spf:[/coremail/i],
+   dkim:['dkim','s1'],
+   tip:'Coremail 邮件系统（多见于高校/大型企业自建）', site:'coremail.cn'},
+  {key:'263', name:'263 企业邮箱', short:'263',
+   vc1:'#C8102E', vc2:'#E8434F',
+   mx:[/263\.net$/i,/\.263\.net$/i],
+   spf:[/263\.net/i],
+   dkim:['dkim','s1'],
+   tip:'263 企业邮箱', site:'263.net'},
+  {key:'39', name:'三五互联 / 35 邮箱', short:'35',
+   vc1:'#0F766E', vc2:'#14B8A6',
+   mx:[/35\.com$/i,/35\.cn$/i],
+   spf:[/35\.com/i],
+   dkim:['dkim'],
+   tip:'三五互联企业邮箱', site:'35.com'},
+  {key:'189', name:'中国电信 189 邮箱', short:'189',
+   vc1:'#0057B8', vc2:'#2E7FD1',
+   mx:[/189\.cn$/i],
+   spf:[/189\.cn/i],
+   dkim:['dkim'],
+   tip:'中国电信 189 企业邮箱', site:'mail.189.cn'},
+  {key:'wo', name:'中国联通沃邮箱', short:'沃邮箱',
+   vc1:'#E4002B', vc2:'#FF5A5F',
+   mx:[/wo\.cn$/i,/chinaunicom/i],
+   spf:[/wo\.cn/i],
+   dkim:['dkim'],
+   tip:'中国联通沃邮箱', site:'mail.wo.cn'},
+  {key:'sina', name:'新浪企业邮箱', short:'新浪',
+   vc1:'#D52B1E', vc2:'#F0653A',
+   mx:[/\.sinamail\.sina\.com\.cn$/i,/sina\.com$/i,/sina\.cn$/i],
+   spf:[/sina\.com/i],
+   dkim:['dkim','s1'],
+   tip:'新浪企业邮箱', site:'mail.sina.com.cn'},
+  {key:'sohu', name:'搜狐企业邮箱', short:'搜狐',
+   vc1:'#C1272D', vc2:'#E85D5D',
+   mx:[/sohu\.com$/i],
+   spf:[/sohu\.com/i],
+   dkim:['dkim'],
+   tip:'搜狐企业邮箱', site:'mail.sohu.com'},
+  {key:'self', name:'自建邮件服务器', short:'自建',
+   vc1:'#334155', vc2:'#64748B',
+   mx:[], spf:[], dkim:['dkim','default','mail','s1'],
+   tip:'自建 / 私有部署邮件系统（Exchange、Postfix、Coremail 等）', site:''}
+];
+
+/* DNS 托管商 */
+var DNS_HOSTS=[
+  [/\.dnspod\.net$/i,'DNSPod（腾讯云）'],
+  [/\.dnsv[123]\.com$/i,'DNSPod（腾讯云）'],
+  [/\.hichina\.com$/i,'阿里云解析（万网）'],
+  [/\.alidns\.com$/i,'阿里云解析'],
+  [/\.cloudflare\.com$/i,'Cloudflare'],
+  [/\.xincache\.com$/i,'新网'],
+  [/\.xns\.com$/i,'新网'],
+  [/\.51dns\.com$/i,'51DNS'],
+  [/\.west\.cn$/i,'西部数码'],
+  [/\.myhostadmin\.net$/i,'西部数码'],
+  [/\.name-services\.com$/i,'GoDaddy'],
+  [/\.domaincontrol\.com$/i,'GoDaddy'],
+  [/\.awsdns-/i,'AWS Route 53'],
+  [/\.azure-dns\./i,'Azure DNS'],
+  [/\.googledomains\.com$/i,'Google Cloud DNS'],
+  [/\.nsone\.net$/i,'NS1'],
+  [/\.dnsimple\.com$/i,'DNSimple'],
+  [/\.yundns\.com$/i,'华为云 DNS'],
+  [/\.huaweicloud-dns\./i,'华为云 DNS'],
+  [/\.jdcloud\.com$/i,'京东云 DNS'],
+  [/\.baidudns\./i,'百度云 DNS'],
+  [/\.wjdns\./i,'网家 DNS']
+];
+function dnsHostOf(nsList){
+  for(var i=0;i<nsList.length;i++){
+    var h=nsList[i].data;
+    for(var k=0;k<DNS_HOSTS.length;k++){
+      if(DNS_HOSTS[k][0].test(h)) return DNS_HOSTS[k][1];
+    }
+  }
+  return nsList.length?'自有 / 未知 NS':'未查询到 NS';
+}
+
+/* ==========================================================
+   体检主流程
+   ========================================================== */
+function identify(domain,mxRecs,txtRecs){
+  var mxHosts=mxRecs.map(function(r){
+    return String(r.data).split(/\s+/).pop().replace(/\.+$/,'').toLowerCase();
+  });
+  var spf='';
+  txtRecs.forEach(function(r){ if(/^v=spf1/i.test(r.data)) spf=r.data; });
+
+  var hit=null, conf='low';
+  for(var i=0;i<VENDORS.length;i++){
+    var v=VENDORS[i];
+    for(var j=0;j<v.mx.length;j++){
+      for(var k=0;k<mxHosts.length;k++){
+        if(v.mx[j].test(mxHosts[k])){ hit=v; conf='high'; break; }
+      }
+      if(hit) break;
+    }
+    if(hit) break;
+  }
+  if(!hit && spf){
+    for(var i2=0;i2<VENDORS.length;i2++){
+      var v2=VENDORS[i2];
+      for(var j2=0;j2<v2.spf.length;j2++){
+        if(v2.spf[j2].test(spf)){ hit=v2; conf='mid'; break; }
+      }
+      if(hit) break;
+    }
+  }
+  /* 自建判定：MX 指向本域或其子域 */
+  if(!hit && mxHosts.length){
+    var selfMx=mxHosts.some(function(h){ return h===domain||h.endsWith('.'+domain); });
+    if(selfMx){ hit=VENDORS[VENDORS.length-1]; conf='high'; }
+  }
+  if(!hit){
+    hit=VENDORS[VENDORS.length-1];
+    hit=Object.assign({},hit,{name:mxHosts.length?'其它 / 未识别厂商':'未配置邮箱',tip:mxHosts.length?'MX 记录未匹配到已知服务商':'该域名没有 MX 记录，当前无法收邮件'});
+    conf='low';
+  }
+  return {vendor:hit,conf:conf,mxHosts:mxHosts,spf:spf};
+}
+
+function parseDmarc(txt){
+  var o={};
+  String(txt).split(';').forEach(function(p){
+    var kv=p.trim().split('=');
+    if(kv.length>=2) o[kv[0].trim().toLowerCase()]=kv.slice(1).join('=').trim();
+  });
+  return o;
+}
+function parseSpf(txt){
+  var mechs=String(txt).trim().split(/\s+/);
+  var all=null, includes=[], lookups=0;
+  mechs.forEach(function(m){
+    if(/^-?all$/i.test(m)||/^~all$/i.test(m)) all=m;
+    if(/^include:/i.test(m)){ includes.push(m.slice(8)); }
+    if(/^(include|a|mx|ptr|exists|redirect)/i.test(m)) lookups++;
+  });
+  return {all:all,includes:includes,lookups:lookups,mechs:mechs};
+}
+
+async function inspect(domain,onStep){
+  var step=onStep||function(){};
+  var rec={A:[],AAAA:[],CNAME:[],MX:[],TXT:[],NS:[],SOA:[],CAA:[],SRV:[],PTR:[]};
+  var meta={};
+
+  step('查 MX / TXT / NS');
+  var base=await Promise.all([
+    limit(function(){return dnsQuery(domain,'MX');}).catch(function(e){return {__err:e};}),
+    limit(function(){return dnsQuery(domain,'TXT');}).catch(function(e){return {__err:e};}),
+    limit(function(){return dnsQuery(domain,'NS');}).catch(function(e){return {__err:e};}),
+    limit(function(){return dnsQuery(domain,'A');}).catch(function(e){return {__err:e};})
+  ]);
+  var jMx=base[0], jTxt=base[1], jNs=base[2], jA=base[3];
+
+  if(jMx && jMx.__err && (!jA||jA.__err)){
+    throw new Error('DNS 查询失败，请检查网络后重试');
+  }
+  meta.mxStatus=statusOf(jMx);
+  rec.MX=jMx&&!jMx.__err?parseAnswers(jMx,15):[];
+  rec.TXT=jTxt&&!jTxt.__err?parseAnswers(jTxt,16):[];
+  rec.NS=jNs&&!jNs.__err?parseAnswers(jNs,2):[];
+  rec.A=jA&&!jA.__err?parseAnswers(jA,1):[];
+
+  /* 补充记录 */
+  step('查 AAAA / CNAME / SOA / CAA');
+  var more=await Promise.all([
+    limit(function(){return dnsQuery(domain,'AAAA');}).catch(function(){return null;}),
+    limit(function(){return dnsQuery(domain,'CNAME');}).catch(function(){return null;}),
+    limit(function(){return dnsQuery(domain,'SOA');}).catch(function(){return null;}),
+    limit(function(){return dnsQuery(domain,'CAA');}).catch(function(){return null;})
+  ]);
+  rec.AAAA=more[0]?parseAnswers(more[0],28):[];
+  rec.CNAME=more[1]?parseAnswers(more[1],5):[];
+  rec.SOA=more[2]?parseAnswers(more[2],6):[];
+  rec.CAA=more[3]?parseAnswers(more[3],257):[];
+
+  /* 识别服务商 */
+  var id=identify(domain,rec.MX,rec.TXT);
+  var vendor=id.vendor;
+  meta.dnsHost=dnsHostOf(rec.NS);
+
+  /* DMARC */
+  step('查 DMARC');
+  var dmarcRec=[], dmarcTxt='';
+  try{
+    var jD=await limit(function(){return dnsQuery('_dmarc.'+domain,'TXT');});
+    dmarcRec=parseAnswers(jD,16);
+    for(var i=0;i<dmarcRec.length;i++){
+      if(/^v=DMARC1/i.test(dmarcRec[i].data)){ dmarcTxt=dmarcRec[i].data; break; }
+    }
+  }catch(e){}
+
+  /* DKIM 探测 */
+  step('探测 DKIM');
+  var dkimHit=null, dkimSel='';
+  var sels=(vendor.dkim||['default','dkim','s1']).concat(['default','dkim','s1','selector1','google']);
+  var uniq=[]; sels.forEach(function(s){ if(uniq.indexOf(s)<0) uniq.push(s); });
+  uniq=uniq.slice(0,8);
+  for(var si=0;si<uniq.length;si++){
+    var sel=uniq[si];
+    try{
+      var jK=await limit(function(){return dnsQuery(sel+'._domainkey.'+domain,'TXT');});
+      var ks=parseAnswers(jK,16);
+      for(var ki=0;ki<ks.length;ki++){
+        if(/v=DKIM1|k=rsa|p=/i.test(ks[ki].data)){ dkimHit=ks[ki].data; dkimSel=sel; break; }
+      }
+    }catch(e){}
+    if(dkimHit) break;
+  }
+
+  /* 主机名探测（自建才有意义） */
+  step('探测邮件入口');
+  var hosts=['mail','smtp','imap','pop','webmail','mx','exchange','autodiscover'];
+  var hostRes={};
+  await Promise.all(hosts.map(function(h){
+    return limit(function(){
+      return dnsQuery(h+'.'+domain,'A').then(function(j){
+        var a=parseAnswers(j,1).filter(function(r){return r.type==='A';});
+        if(a.length) hostRes[h]=a[0].data;
+      }).catch(function(){});
+    });
+  }));
+  var hostOk=Object.keys(hostRes).length;
+
+  /* ---------- 评分 ---------- */
+  var checks=[], total=0;
+
+  /* 1. MX 25 */
+  var mxOk=false, mxResolvable=false;
+  if(rec.MX.length){
+    mxOk=true;
+    /* 解析 MX 主机 */
+    var mxAddrs={};
+    await Promise.all(rec.MX.map(function(m){
+      var host=String(m.data).split(/\s+/).pop().replace(/\.$/,'');
+      return limit(function(){
+        return Promise.all([
+          dnsQuery(host,'A').catch(function(){return null;}),
+          dnsQuery(host,'CNAME').catch(function(){return null;})
+        ]).then(function(rr){
+          var a=rr[0]?parseAnswers(rr[0],1).filter(function(x){return x.type==='A';}):[];
+          var c=rr[1]?parseAnswers(rr[1],5).filter(function(x){return x.type==='CNAME';}):[];
+          mxAddrs[host]={a:a.map(function(x){return x.data;}),cname:c.map(function(x){return x.data;})};
+        });
+      });
+    }));
+    Object.keys(mxAddrs).forEach(function(h){
+      if(mxAddrs[h].a.length||mxAddrs[h].cname.length) mxResolvable=true;
+    });
+    total+=mxResolvable?25:12;
+    checks.push({
+      lv:mxResolvable?'ok':'warn',
+      t:'MX 记录'+(mxResolvable?'正常':'可疑'),
+      d:rec.MX.map(function(m){return String(m.data);}).join(' / '),
+      v:mxResolvable?'25/25':'12/25',
+      adv:mxResolvable?'MX 指向 '+id.vendor.name+'，可正常收信。':'MX 指向的主机无法解析，外部邮件可能投递失败。建议核对 MX 主机名是否拼错，或该服务已停用。'
+    });
+  }else{
+    checks.push({
+      lv:'err',
+      t:'没有 MX 记录',
+      d:'该域名当前无法接收邮件',
+      v:'0/25',
+      adv:'客户现在没有可用企业邮箱，这是最直接的切入机会。可先确认是否用免费邮箱（如 QQ/163）临时顶着，再推企业邮箱方案。'
+    });
+  }
+
+  /* 2. SPF 25 */
+  var spfRes=id.spf?parseSpf(id.spf):null;
+  var spfCount=rec.TXT.filter(function(r){return /^v=spf1/i.test(r.data);}).length;
+  if(!spfRes){
+    checks.push({
+      lv:'err',t:'SPF 未配置',d:'没有 v=spf1 记录',v:'0/25',
+      adv:'未配置 SPF 时，任何人都能伪造该域名发信，客户发出的邮件也更容易进垃圾箱。建议添加：<b>v=spf1 include:'+(vendor.key==='tencent'?'spf.mail.qq.com':vendor.key==='aliyun'?'spf.mail.aliyun.com':vendor.key==='netease'?'spf.qiye.163.com':'<你的邮件服务商SPF>')+' ~all</b>'
+    });
+  }else if(spfCount>1){
+    total+=8;
+    checks.push({
+      lv:'err',t:'SPF 记录重复',d:'检测到 '+spfCount+' 条 v=spf1，属于配置错误',v:'8/25',
+      adv:'一个域名只能有 1 条 SPF。多条会导致收信方判定为无效，邮件直接进垃圾箱。需合并成一条。'
+    });
+  }else{
+    var s=12;
+    if(spfRes.all==='-all') s=25;
+    else if(spfRes.all==='~all') s=20;
+    else if(spfRes.all==='?all') s=14;
+    total+=s;
+    checks.push({
+      lv:spfRes.all?'ok':'warn',
+      t:'SPF '+(spfRes.all?'已配置':'缺少 all 结尾'),
+      d:i18nSpf(id.spf),
+      v:s+'/25',
+      adv:spfRes.all==='-all'
+        ?'SPF 用 -all 严格拒绝，防伪冒做得比较到位。'
+        :spfRes.all==='~all'
+          ?'SPF 用 ~all（软失败），目前最常见也够用。若客户在意仿冒，可建议改 -all。'
+          :'SPF 结尾不是 -all/~all，收信方可能不采信，建议改成 ~all。'
+    });
+  }
+
+  /* 3. DMARC 25 */
+  if(!dmarcTxt){
+    checks.push({
+      lv:'err',t:'DMARC 未配置',d:'_dmarc.'+domain+' 无记录',v:'0/25',
+      adv:'没有 DMARC，等于没告诉收信方「别人冒充我发信该怎么办」。这是钓鱼仿冒的高发点，也是最容易补的一项。建议先上 <b>v=DMARC1; p=none; rua=mailto:dmarc@'+domain+'</b>，观察两周再收紧。'
+    });
+  }else{
+    var dm=parseDmarc(dmarcTxt);
+    var p=(dm.p||'none').toLowerCase();
+    var ds=10;
+    if(p==='reject') ds=25;
+    else if(p==='quarantine') ds=19;
+    else if(p==='none') ds=10;
+    total+=ds;
+    checks.push({
+      lv:p==='none'?'warn':'ok',
+      t:'DMARC 策略 p='+p,
+      d:dmarcTxt,
+      v:ds+'/25',
+      adv:p==='none'
+        ?'DMARC 存在但策略是 p=none，只做监控不拦截，冒充邮件照样能进。建议观察期后升级到 quarantine，再升 reject。'
+        :'DMARC 已进入拦截策略，防伪冒配置较好。'
+    });
+  }
+
+  /* 4. DKIM 15 */
+  if(dkimHit){
+    total+=15;
+    checks.push({
+      lv:'ok',t:'DKIM 已启用',
+      d:'selector: '+dkimSel+'._domainkey',
+      v:'15/15',
+      adv:'DKIM 签名正常，邮件完整性和身份认证有保障。'
+    });
+  }else{
+    checks.push({
+      lv:'warn',t:'未探测到 DKIM',
+      d:'已尝试 '+uniq.length+' 个常见 selector',
+      v:'0/15',
+      adv:'不代表一定没有（selector 可能自定义），但大概率未配置。没有 DKIM 时，邮件更容易被判垃圾，也更容易被仿冒。可在邮件后台生成密钥后添加 TXT 记录。'
+    });
+  }
+
+  /* 5. 记录健康 10 */
+  var hs=0, hIssues=[];
+  if(rec.NS.length) hs+=5; else hIssues.push('未查到 NS');
+  var mxCnameConflict=Object.keys(mxAddrs||{}).some(function(h){return mxAddrs[h].cname.length>0;});
+  if(!mxCnameConflict) hs+=5; else hIssues.push('MX 指向了 CNAME');
+  total+=hs;
+  checks.push({
+    lv:hs===10?'ok':'warn',
+    t:'DNS 记录结构'+(hs===10?'健康':'有问题'),
+    d: hIssues.length?hIssues.join('；'):('NS：'+rec.NS.map(function(n){return n.data;}).join(' / ')+'　托管：'+meta.dnsHost),
+    v:hs+'/10',
+    adv: hs===10?'记录结构没有明显冲突。':'MX 记录不能指向 CNAME（RFC 违规），部分发信方会直接退信，需要改成 A 记录。'
+  });
+
+  /* 主机名信息（不计分） */
+  if(id.vendor.key!=='self' && conf_isHosted(vendor)){
+    checks.push({
+      lv:'info',t:'托管邮箱，无需自建入口',
+      d:'网页登录走服务商域名，'+domain+' 下无 mail/imap 主机属正常',
+      v:'—',
+      adv:'客户用的是托管邮箱，登录入口在服务商侧（如 exmail.qq.com）。做迁移方案时要重点确认历史邮件迁移和账号数。'
+    });
+  }else if(hostOk){
+    checks.push({
+      lv:'ok',t:'邮件入口可解析',
+      d:Object.keys(hostRes).map(function(h){return h+'.'+domain+' → '+hostRes[h];}).join('；'),
+      v:'—',
+      adv:'自建邮件系统的对外入口是通的。可进一步测 25/443 端口是否开放（浏览器侧无法直接探测，需服务端）。'
+    });
+  }else{
+    checks.push({
+      lv:'warn',t:'未发现邮件入口主机名',
+      d:'mail / smtp / imap 等均无 A 记录',
+      v:'—',
+      adv:'如果客户是自建邮件系统，说明对外入口可能没配好，或者用的是完全不同的主机名。可以追问 IT 要实际访问地址。'
+    });
+  }
+
+  /* 多线路一致性（用当前可用线路，各查一次做比对） */
+  var diff=null;
+  if(rec.A.length){
+    var dl=usableLines().filter(function(l){return l.id!=='local';}).slice(0,3);
+    if(dl.length<2) dl=LINES.filter(function(l){return l.id!=='local';}).slice(0,3);
+    diff=await Promise.all(dl.map(function(L){
+      return dnsQuery(domain,'A',{rid:L.id,timeout:5000})
+        .then(function(j){ return {rid:L.id,name:L.name,ok:true,ips:parseAnswers(j,1).filter(function(r){return r.type==='A';}).map(function(r){return r.data;}).sort()}; })
+        .catch(function(){ return {rid:L.id,name:L.name,ok:false,ips:[]}; });
+    }));
+  }
+
+  return {
+    domain:domain, rec:rec, meta:meta, vendor:vendor, conf:id.conf,
+    checks:checks, score:Math.max(0,Math.min(100,total)),
+    dmarc:dmarcTxt, dkim:dkimHit?dkimSel:'', diff:diff,
+    ts:Date.now()
+  };
+}
+function conf_isHosted(v){ return ['tencent','aliyun','netease','netease-free','m365','google','coremail','263','35','189','wo','sina','sohu'].indexOf(v.key)>-1; }
+
+function i18nSpf(s){
+  return String(s).replace(/include:spf\.mail\.qq\.com/gi,'include:spf.mail.qq.com（腾讯企业邮）')
+    .replace(/include:spf\.qiye\.163\.com/gi,'include:spf.qiye.163.com（网易企业邮）')
+    .replace(/include:spf\.mail\.aliyun\.com/gi,'include:spf.mail.aliyun.com（阿里云）')
+    .replace(/include:spf\.protection\.outlook\.com/gi,'include:spf.protection.outlook.com（M365）')
+    .replace(/include:_spf\.google\.com/gi,'include:_spf.google.com（Google）');
+}
+
+/* ==========================================================
+   渲染
+   ========================================================== */
+var lastResult=null;
+
+/* ---------------- 线路状态 UI ---------------- */
+function renderLineBar(){
+  var bar=$('#lineBar'); if(!bar) return;
+  var best=bestLine();
+  var okN=LINES.filter(function(l){ var h=health[l.id]; return h.state==='ok'; }).length;
+  var dot=bar.querySelector('.ld'), txt=$('#lineTxt');
+  if(best){
+    dot.className='ld ok';
+    txt.innerHTML='当前线路 <b>'+esc(best.name)+'</b>　'+health[best.id].ms+'ms'+
+      (okN>1?'　<span style="opacity:.8">'+okN+' 条可用</span>':'');
+  }else{
+    dot.className='ld bad';
+    txt.innerHTML='<b>线路全部不可用</b>　点右侧检查';
+  }
+}
+function toggleLinePanel(){
+  var old=$('#linePanel');
+  if(old){ old.parentNode.removeChild(old); return; }
+  var host=$('#linePanelHost');
+  var shown=LINES.filter(function(l){ return !l.hidden || (l.id==='local'&&bavail); });
+  var order=usableLines();
+  var curId=lockId||(bestLine()&&bestLine().id);
+  shown=shown.slice().sort(function(a,b){
+    var ia=order.indexOf(a), ib=order.indexOf(b);
+    if(ia<0) ia=99; if(ib<0) ib=99;
+    if(ia!==ib) return ia-ib;
+    return a.prio-b.prio;
+  });
+  var h='<div class="linepanel" id="linePanel">'+
+    '<div class="lp-h">查询线路 <span>'+shown.length+' 条 · 按优先级排</span></div>';
+  shown.forEach(function(L){
+    var st=health[L.id];
+    var cls=st.state==='ok'?'ok':st.state==='bad'?'bad':st.state==='mid'?'mid':'idle';
+    var txt=st.state==='ok'?st.ms+'ms':st.state==='bad'?'不可用':st.state==='mid'?'不稳定':'待检测';
+    var using=(L.id===curId);
+    h+='<div class="lp-row">'+
+      '<span class="ld '+cls+'"></span>'+
+      '<div class="nm">'+esc(L.name)+(using?'<span class="using">使用中</span>':'')+'<em>'+esc(L.note)+'</em></div>'+
+      '<span class="st '+cls+'">'+txt+'</span>'+
+      '<button data-lock="'+L.id+'" class="'+(lockId===L.id?'on':'')+'">'+(lockId===L.id?'已锁定':'锁定')+'</button>'+
+    '</div>';
+  });
+  h+='<div class="lp-foot">自动模式优先用最快且可用的线路，单条失败立即换下一条。锁定用于排查，锁死后只走该线路。</div></div>';
+  host.innerHTML=h;
+
+  $$('[data-lock]',host).forEach(function(b){
+    b.addEventListener('click',function(){
+      var id=b.getAttribute('data-lock');
+      lockId=(lockId===id)?null:id;
+      toast(lockId?'已锁定：'+lineById(id).name:'已切回自动');
+      toggleLinePanel(); toggleLinePanel();
+      renderLineBar();
+    });
+  });
+}
+$('#lineBtn').addEventListener('click',toggleLinePanel);
+
+function scoreColor(s){
+  if(s>=85) return 'var(--ok)';
+  if(s>=60) return 'var(--warn)';
+  return 'var(--err)';
+}
+function ringHtml(score){
+  var C=2*Math.PI*42;
+  var off=C*(1-Math.max(0,Math.min(100,score))/100);
+  return '<div class="ringwrap">'+
+    '<svg class="ring" viewBox="0 0 100 100">'+
+    '<circle class="bgc" cx="50" cy="50" r="42"></circle>'+
+    '<circle class="fgc" cx="50" cy="50" r="42" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+C.toFixed(1)+'" data-off="'+off.toFixed(1)+'"></circle>'+
+    '</svg>'+
+    '<div class="ringtxt">'+score+'<small>分</small></div>'+
+    '</div>';
+}
+function lvText(lv){
+  return lv==='ok'?'配置正常':lv==='warn'?'建议优化':lv==='err'?'存在风险':'参考信息';
+}
+
+function renderResult(res){
+  lastResult=res;
+  var v=res.vendor;
+  var scoreTxt=res.score>=85?'配置健康':res.score>=60?'基本可用，有优化空间':'配置薄弱，存在明显风险';
+  var h='';
+
+  /* 服务商卡 */
+  h+='<div class="vcard" style="--vc1:'+v.vc1+';--vc2:'+v.vc2+'">'+
+      '<div class="vc-top"><div style="min-width:0">'+
+        '<div class="vc-lab">当前邮件服务商</div>'+
+        '<div class="vc-name">'+esc(v.name)+'</div>'+
+        '<div class="vc-sub">'+esc(v.tip||'')+'</div>'+
+        '<div class="vc-dom mono">'+esc(res.domain)+'</div>'+
+      '</div>'+ringHtml(res.score)+'</div>'+
+      '<div class="vc-mx">'+
+        '<span><b>MX</b>'+(res.rec.MX.length?res.rec.MX.map(function(m){return esc(String(m.data));}).join('　'):'无记录')+'</span>'+
+        (res.meta.dnsHost?'<span><b>DNS</b>'+esc(res.meta.dnsHost)+'</span>':'')+
+      '</div>'+
+    '</div>';
+
+  /* 评分说明 */
+  h+='<div class="card" style="padding:13px 16px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center">'+
+        '<div style="font-size:13px;font-weight:700">邮箱配置健康度：'+scoreTxt+'</div>'+
+        '<div class="live"><i></i>实时</div>'+
+      '</div>'+
+      '<div class="meter">'+Array.apply(null,Array(10)).map(function(_,i){
+        return '<i style="background:'+(i<Math.round(res.score/10)?scoreColor(res.score):'var(--line)')+'"></i>';
+      }).join('')+'</div>'+
+    '</div>';
+
+  /* 检查项 */
+  h+='<div class="card"><div class="card-h"><h2><span class="bar-ic"></span>配置检查</h2><span class="hint">点击看建议</span></div>';
+  res.checks.forEach(function(c,idx){
+    h+='<div class="chk" data-idx="'+idx+'">'+
+        '<div class="dot '+c.lv+'">'+(c.lv==='ok'?'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>':c.lv==='err'?'!':c.lv==='warn'?'!':'i')+'</div>'+
+        '<div class="chk-main">'+
+          '<div class="chk-t">'+esc(c.t)+'<span class="tag">'+lvText(c.lv)+'</span></div>'+
+          '<div class="chk-d">'+esc(c.d)+'</div>'+
+          '<div class="chk-adv">'+c.adv+'</div>'+
+        '</div>'+
+        '<div class="chk-v">'+esc(c.v)+'</div>'+
+      '</div>';
+  });
+  h+='</div>';
+
+  /* 多线路 */
+  if(res.diff){
+    var okLines=res.diff.filter(function(d){return d.ok;});
+    var uniqSet={};
+    okLines.forEach(function(d){ uniqSet[d.ips.join(',')]=1; });
+    var consistent=Object.keys(uniqSet).length<=1;
+    h+='<div class="card" style="padding:13px 16px">'+
+        '<div style="font-size:13px;font-weight:700;margin-bottom:8px">多线路一致性'+
+          '<span style="font-weight:600;font-size:11.5px;color:'+(consistent?'var(--ok)':'var(--warn)')+';margin-left:8px">'+(okLines.length<2?'线路不足，无法比对':consistent?'三家结果一致':'结果不一致，可能有缓存')+'</span>'+
+        '</div>'+
+        res.diff.map(function(d){
+          var nm=d.name||d.rid;
+          return '<div style="display:flex;gap:8px;font-size:11.5px;padding:3px 0;color:var(--tx2)">'+
+            '<span style="width:6px;height:6px;border-radius:50%;margin-top:6px;background:'+(d.ok?'var(--ok)':'var(--tx3)')+';flex:none"></span>'+
+            '<span style="flex:none;width:130px">'+nm+'</span>'+
+            '<span class="mono" style="word-break:break-all">'+(d.ok?(d.ips.join(', ')||'无 A 记录'):'本网络不可达')+'</span>'+
+          '</div>';
+        }).join('')+
+        (consistent?'':'<div class="mini" style="margin-top:7px">不一致通常意味着刚改完解析、缓存还没过期。客户说「我明明改了」，就看这里。</div>')+
+      '</div>';
+  }
+
+  /* 记录明细 */
+  var order=['A','AAAA','CNAME','MX','TXT','NS','SOA','CAA','SRV','PTR'];
+  var cnt={}; var totalRec=0;
+  order.forEach(function(t){ cnt[t]=(res.rec[t]||[]).length; totalRec+=cnt[t]; });
+  h+='<div class="card"><div class="card-h"><h2><span class="bar-ic"></span>解析记录</h2>'+
+      '<span class="hint">'+totalRec+' 条 · TTL 秒</span></div>';
+  h+='<div class="rtabs"><button class="rtab on" data-rt="ALL">全部 '+totalRec+'</button>'+
+     order.filter(function(t){return cnt[t];}).map(function(t){
+       return '<button class="rtab" data-rt="'+t+'">'+t+' '+cnt[t]+'</button>';
+     }).join('')+'</div><div id="recList"></div>';
+  h+='<div class="row2" style="margin-top:12px">'+
+      '<button class="btn-ghost" id="copyAll">复制全部记录</button>'+
+      '<button class="btn-ghost" id="exportCsv">导出 CSV</button>'+
+    '</div></div>';
+
+  /* 结论建议 */
+  h+='<div class="card" style="background:var(--softbg);border-color:var(--softbd)">'+
+      '<div class="card-h"><h2><span class="bar-ic"></span>切入建议</h2></div>'+
+      '<div style="font-size:13px;line-height:1.75;color:var(--tx2)">'+adviceHtml(res)+'</div>'+
+    '</div>';
+
+  h+='<div class="foot">查询时间：'+new Date(res.ts).toLocaleString('zh-CN',{hour12:false})+'<br>结果直接来自公共 DNS，未做人工干预</div>';
+
+  var box=$('#qResult');
+  box.innerHTML=h;
+
+  /* 动画：评分环 */
+  requestAnimationFrame(function(){
+    var fg=$('.ring .fgc',box);
+    if(fg) setTimeout(function(){ fg.style.strokeDashoffset=fg.getAttribute('data-off'); },60);
+  });
+
+  /* 记录列表 */
+  renderRecList('ALL');
+
+  /* 交互 */
+  $$('.chk',box).forEach(function(el){
+    el.addEventListener('click',function(){ el.classList.toggle('open'); });
+  });
+  $$('.rtab',box).forEach(function(b){
+    b.addEventListener('click',function(){
+      $$('.rtab',box).forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); renderRecList(b.getAttribute('data-rt'));
+    });
+  });
+  $('#copyAll',box).addEventListener('click',function(){
+    copyText(recordsToText(res));
+  });
+  $('#exportCsv',box).addEventListener('click',function(){
+    exportCsv([res]);
+  });
+
+  /* 写入历史 */
+  pushHistory(res);
+}
+
+function renderRecList(type){
+  var res=lastResult;
+  if(!res) return;
+  var box=$('#recList'); if(!box) return;
+  var rows=[];
+  if(type==='ALL'){
+    ['A','AAAA','CNAME','MX','TXT','NS','SOA','CAA','SRV','PTR'].forEach(function(t){
+      (res.rec[t]||[]).forEach(function(r){ rows.push(r); });
+    });
+  }else{
+    rows=(res.rec[type]||[]).slice();
+  }
+  if(!rows.length){ box.innerHTML='<div class="rempty">没有该类型记录</div>'; return; }
+  box.innerHTML=rows.map(function(r){
+    return '<div class="rrow">'+
+      '<span class="rtype">'+esc(r.type)+'</span>'+
+      '<span class="rdata">'+esc(r.data)+'</span>'+
+      '<span class="rttl">'+r.ttl+'</span>'+
+      '<button class="copybtn" data-c="'+esc(r.data)+'">复制</button>'+
+    '</div>';
+  }).join('');
+  $$('.copybtn',box).forEach(function(b){
+    b.addEventListener('click',function(){ copyText(b.getAttribute('data-c')); });
+  });
+}
+
+function recordsToText(res){
+  var lines=['域名：'+res.domain,'服务商：'+res.vendor.name,'健康度：'+res.score+'/100',''];
+  ['A','AAAA','CNAME','MX','TXT','NS','SOA','CAA','SRV','PTR'].forEach(function(t){
+    (res.rec[t]||[]).forEach(function(r){
+      lines.push(t+'\t'+r.data+'\tTTL '+r.ttl);
+    });
+  });
+  return lines.join('\n');
+}
+
+function adviceHtml(res){
+  var v=res.vendor, s=res.score, out=[];
+  if(!res.rec.MX.length){
+    out.push('<b>最直接的切入点：</b>该域名没有 MX 记录，现在收不了企业邮件。先问清楚是不是用个人 QQ/163 邮箱在顶着业务，再从「统一形象 + 离职账号可回收」切入。');
+  }else if(s<60){
+    out.push('<b>配置薄弱，是机会点：</b>'+v.name+' 的 SPF / DMARC / DKIM 有缺口，客户发出的邮件容易进垃圾箱、也容易被仿冒。可以先送一份「邮件送达率与防伪冒体检」，再谈替换或加固。');
+  }else if(s<85){
+    out.push('<b>基本可用，仍有优化空间：</b>配置大体正确，卡在 '+(res.dmarc?'DKIM 或 DMARC 策略':'DMARC/DKIM')+' 上。适合用「免费加固 + 迁移方案」做切入，不硬碰替换。');
+  }else{
+    out.push('<b>配置较完善：</b>说明有 IT 在管。别打「你们配置有问题」，改打「成本 / 账号管理 / 与企微打通 / 海外收发」这类增量价值。');
+  }
+  var bad=res.checks.filter(function(c){return c.lv==='err';}).length;
+  var warn=res.checks.filter(function(c){return c.lv==='warn';}).length;
+  out.push('<br><b>当前状态：</b>'+esc(v.name)+' · '+bad+' 项风险 · '+warn+' 项待优化。');
+  if(v.key==='tencent') out.push('<br><b>注意：</b>客户已在腾讯体系内，替换难度大。更适合做增值（企微、邮箱归档、安全）或对比成本。');
+  if(v.key==='aliyun') out.push('<br><b>注意：</b>阿里云邮箱客户，重点关注是否与钉钉深度绑定，替换要连带 IM 一起谈。');
+  if(v.key==='netease') out.push('<br><b>注意：</b>网易企业邮存量客户，常见痛点是海外退信和管理后台难用，可从这两点切入。');
+  if(v.key==='m365'||v.key==='google') out.push('<br><b>注意：</b>外资/跨境客户，替换成本高。除非有合规或成本诉求，否则优先做补充方案。');
+  return out.join('');
+}
+
+/* ---------------- CSV ---------------- */
+function exportCsv(list){
+  var head=['域名','服务商','健康度','MX','SPF','DMARC','DKIM','DNS托管','查询时间'];
+  var rows=[head];
+  list.forEach(function(r){
+    var spfRec=(r.rec.TXT||[]).filter(function(x){return /^v=spf1/i.test(x.data);})[0];
+    rows.push([
+      r.domain, r.vendor.name, r.score,
+      (r.rec.MX||[]).map(function(m){return m.data;}).join(' | '),
+      spfRec?spfRec.data:'无',
+      r.dmarc||'无',
+      r.dkim?('已启用('+r.dkim+')'):'未探测到',
+      r.meta.dnsHost||'',
+      new Date(r.ts).toLocaleString('zh-CN',{hour12:false})
+    ]);
+  });
+  var csv='\ufeff'+rows.map(function(row){
+    return row.map(function(c){
+      var s=String(c==null?'':c);
+      return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;
+    }).join(',');
+  }).join('\r\n');
+  try{
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='域名邮箱体检_'+new Date().toISOString().slice(0,10)+'.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },2000);
+    toast('已导出 CSV');
+  }catch(e){
+    copyText(csv); toast('当前环境不支持下载，已复制到剪贴板');
+  }
+}
+
+/* ==========================================================
+   历史
+   ========================================================== */
+function pushHistory(res){
+  var list=LS.get('sd_hist',[]);
+  list=list.filter(function(x){return x.domain!==res.domain;});
+  list.unshift({
+    domain:res.domain, vendor:res.vendor.name, score:res.score,
+    vc1:res.vendor.vc1, ts:res.ts
+  });
+  if(list.length>60) list=list.slice(0,60);
+  LS.set('sd_hist',list);
+  renderHistory();
+}
+function renderHistory(){
+  var list=LS.get('sd_hist',[]);
+  var box=$('#histList');
+  if(!box) return;
+  if(!list.length){
+    box.innerHTML='<div class="rempty">还没有查询记录<br><span style="font-size:11.5px">查过的域名会自动出现在这里</span></div>';
+    return;
+  }
+  box.innerHTML=list.map(function(x,i){
+    var cls=x.score>=85?'g':x.score>=60?'y':'r';
+    return '<div class="hrow" data-d="'+esc(x.domain)+'">'+
+      '<div class="bs '+cls+'">'+x.score+'</div>'+
+      '<div class="hd"><div class="hn">'+esc(x.domain)+'</div>'+
+        '<div class="hs">'+esc(x.vendor)+' · '+timeAgo(x.ts)+'</div></div>'+
+      '<button class="hdel" data-del="'+i+'">删</button>'+
+    '</div>';
+  }).join('');
+
+  $$('.hrow',box).forEach(function(el){
+    el.addEventListener('click',function(e){
+      if(e.target.hasAttribute('data-del')) return;
+      var d=el.getAttribute('data-d');
+      document.querySelector('[data-view="v-query"]').click();
+      $('#domainInput').value=d;
+      runQuery();
+    });
+  });
+  $$('[data-del]',box).forEach(function(b){
+    b.addEventListener('click',function(e){
+      e.stopPropagation();
+      var i=+b.getAttribute('data-del');
+      var l=LS.get('sd_hist',[]); l.splice(i,1); LS.set('sd_hist',l); renderHistory();
+    });
+  });
+}
+function timeAgo(ts){
+  var d=Date.now()-ts;
+  if(d<60000) return '刚刚';
+  if(d<3600000) return Math.floor(d/60000)+' 分钟前';
+  if(d<86400000) return Math.floor(d/3600000)+' 小时前';
+  return new Date(ts).toLocaleDateString('zh-CN');
+}
+
+/* ==========================================================
+   主查询交互
+   ========================================================== */
+var busy=false;
+async function runQuery(){
+  var raw=$('#domainInput').value;
+  var d=cleanDomain(raw);
+  if(!d){ toast('请输入域名'); return; }
+  if(!isValidDomain(d)){ toast('域名格式不对，试试 example.com'); return; }
+  if(busy) return;
+  busy=true;
+  var btn=$('#goBtn'); btn.disabled=true; btn.textContent='查询中';
+
+  var box=$('#qResult');
+  box.innerHTML='<div class="card"><div class="sk" style="height:96px;border-radius:14px"></div>'+
+    '<div class="sk" style="height:18px;width:60%;margin-top:14px"></div>'+
+    '<div class="sk" style="height:14px;width:85%;margin-top:10px"></div>'+
+    '<div class="sk" style="height:14px;width:70%;margin-top:8px"></div></div>'+
+    '<div class="card"><div class="mini" id="stepTxt">正在连接 DNS…</div></div>';
+
+  try{
+    var res=await inspect(d,function(step){
+      var el=$('#stepTxt'); if(el) el.textContent=step+'…';
+    });
+    renderResult(res);
+    if(window.scrollTo){
+      var top=box.getBoundingClientRect().top+window.scrollY-64;
+      window.scrollTo({top:top,behavior:'smooth'});
+    }
+  }catch(e){
+    var msg=e&&e.message||'';
+    var tip = msg==='ALL_LINES_FAILED'
+      ? '所有查询线路都无法访问。已自动试过：'+((e.tried||[]).join('、')||'全部线路')+'。<br>请检查手机网络（部分内网/代理会拦截 DNS 查询），或稍后重试。'
+      : msg==='NO_LINE'
+        ? '没有可用线路，请点上方「线路详情」检查。'
+        : '可能是当前网络无法访问公共 DNS，或域名不存在。换个网络再试一次。';
+    box.innerHTML='<div class="errbox">查询失败<br><span style="opacity:.85;font-weight:400">'+tip+'</span>'+
+      '<div style="margin-top:10px"><button class="btn-ghost" id="retryBtn" style="height:36px;font-size:13px">重试</button></div></div>';
+    var rb=$('#retryBtn'); if(rb) rb.addEventListener('click',function(){ runQuery(); });
+  }finally{
+    busy=false; btn.disabled=false; btn.textContent='体检';
+  }
+}
+
+$('#goBtn').addEventListener('click',runQuery);
+$('#domainInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){ e.preventDefault(); this.blur(); runQuery(); }
+});
+
+/* 快捷示例 */
+var SAMPLES=['qq.com','163.com','aliyun.com'];
+$('#chips').innerHTML=SAMPLES.map(function(d){return '<button class="chip" data-d="'+d+'">'+d+'</button>';}).join('');
+$$('#chips .chip[data-d]').forEach(function(b){
+  b.addEventListener('click',function(){
+    $('#domainInput').value=b.getAttribute('data-d');
+    runQuery();
+  });
+});
+
+/* ==========================================================
+   批量
+   ========================================================== */
+var batchBusy=false, batchResults=[];
+$('#batchGo').addEventListener('click',async function(){
+  if(batchBusy) return;
+  var raw=$('#batchInput').value||'';
+  var parts=raw.split(/[\s,，;；\n\r]+/).filter(Boolean);
+  var doms=[];
+  parts.forEach(function(p){
+    var d=cleanDomain(p.replace(/^[^:：]*[:：]/,''));
+    if(isValidDomain(d)&&doms.indexOf(d)<0) doms.push(d);
+  });
+  if(!doms.length){ toast('没识别到有效域名'); return; }
+  if(doms.length>25) doms=doms.slice(0,25);
+  batchBusy=true; batchResults=[];
+  var btn=this; btn.disabled=true; btn.textContent='体检中 0/'+doms.length;
+  var box=$('#batchResult');
+  box.innerHTML='<div class="card"><div class="card-h"><h2><span class="bar-ic"></span>进度</h2><span class="hint" id="bp">0/'+doms.length+'</span></div>'+
+    '<div class="meter" id="bmeter">'+doms.map(function(){return '<i></i>';}).join('')+'</div></div>'+
+    '<div class="card" id="blist"><div class="rempty">准备中…</div></div>';
+
+  for(var i=0;i<doms.length;i++){
+    btn.textContent='体检中 '+(i+1)+'/'+doms.length;
+    var p=$('#bp'); if(p) p.textContent=(i)+'/'+doms.length;
+    try{
+      var r=await inspect(doms[i]);
+      batchResults.push(r);
+    }catch(e){
+      batchResults.push({domain:doms[i],failed:true});
+    }
+    var m=$('#bmeter i:nth-child('+(i+1)+')');
+    if(m) m.style.background = batchResults[i].failed?'var(--err)':'var(--brand)';
+    renderBatchList();
+    var p2=$('#bp'); if(p2) p2.textContent=(i+1)+'/'+doms.length;
+  }
+  btn.disabled=false; btn.textContent='开始批量体检'; batchBusy=false;
+  renderBatchList(true);
+});
+
+function renderBatchList(done){
+  var box=$('#blist'); if(!box) return;
+  if(!batchResults.length){ box.innerHTML='<div class="rempty">准备中…</div>'; return; }
+  var h=batchResults.map(function(r){
+    if(r.failed){
+      return '<div class="brow"><div class="bs n">—</div><div class="bd"><div class="n">'+esc(r.domain)+'</div><div class="s">查询失败，可能域名不存在</div></div></div>';
+    }
+    var cls=r.score>=85?'g':r.score>=60?'y':'r';
+    var bad=r.checks.filter(function(c){return c.lv==='err';}).length;
+    return '<div class="brow" data-d="'+esc(r.domain)+'">'+
+      '<div class="bs '+cls+'">'+r.score+'</div>'+
+      '<div class="bd"><div class="n">'+esc(r.domain)+'</div>'+
+      '<div class="s">'+esc(r.vendor.name)+(bad?' · '+bad+' 项风险':' · 无明显风险')+'</div></div>'+
+      '<span style="color:var(--tx3);font-size:16px">›</span></div>';
+  }).join('');
+
+  var doneN=batchResults.filter(function(r){return !r.failed;}).length;
+  if(done&&doneN){
+    var avg=Math.round(batchResults.filter(function(r){return !r.failed;}).reduce(function(a,b){return a+b.score;},0)/doneN);
+    h='<div class="card-h" style="margin-bottom:6px"><h2><span class="bar-ic"></span>结果 '+doneN+' 个</h2>'+
+      '<span class="hint">平均 '+avg+' 分</span></div>'+
+      '<div class="row2" style="margin:0 0 8px"><button class="btn-ghost" id="batchCsv">导出 CSV</button>'+
+      '<button class="btn-ghost" id="batchCopy">复制清单</button></div>'+h;
+  }
+  box.innerHTML=h;
+
+  $$('.brow[data-d]',box).forEach(function(el){
+    el.addEventListener('click',function(){
+      var d=el.getAttribute('data-d');
+      document.querySelector('[data-view="v-query"]').click();
+      $('#domainInput').value=d; runQuery();
+    });
+  });
+  var bc=$('#batchCsv',box);
+  if(bc) bc.addEventListener('click',function(){ exportCsv(batchResults.filter(function(r){return !r.failed;})); });
+  var bp=$('#batchCopy',box);
+  if(bp) bp.addEventListener('click',function(){
+    var txt=batchResults.filter(function(r){return !r.failed;}).map(function(r){
+      return r.domain+'\t'+r.vendor.name+'\t'+r.score+'分';
+    }).join('\n');
+    copyText(txt);
+  });
+}
+
+$('#batchClear').addEventListener('click',function(){
+  $('#batchInput').value=''; $('#batchResult').innerHTML=''; batchResults=[];
+});
+
+/* ==========================================================
+   页签
+   ========================================================== */
+$$('.tb').forEach(function(t){
+  t.addEventListener('click',function(){
+    $$('.tb').forEach(function(x){x.classList.remove('on');});
+    t.classList.add('on');
+    $$('.view').forEach(function(v){v.classList.remove('active');});
+    var v=$('#'+t.getAttribute('data-view')); if(v) v.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(t.getAttribute('data-view')==='v-hist') renderHistory();
+  });
+});
+$('#histClear').addEventListener('click',function(){
+  if(!LS.get('sd_hist',[]).length){ toast('没有记录'); return; }
+  LS.del('sd_hist'); renderHistory(); toast('已清空');
+});
+
+/* 引导：加到手机桌面（只在移动端、非独立窗口、未关闭过时出现） */
+(function(){
+  var KEY='sd_insHide';
+  var bar=$('#insBar'); if(!bar) return;
+  var ua=navigator.userAgent||'';
+  var mob=/Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+  var stand=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  if(!mob||stand||LS.get(KEY)) return;
+  var inWx=/wxwork/i.test(ua)||/MicroMessenger/i.test(ua);
+  var ios=/iPhone|iPad|iPod/i.test(ua);
+  if(inWx){
+    $('#insTitle').textContent='想天天用？加到桌面';
+    $('#insDesc').textContent='点右上角 ··· →「在浏览器打开」，再添加到主屏幕';
+  }else if(ios){
+    $('#insDesc').textContent='点底部「分享」→「添加到主屏幕」';
+  }else{
+    $('#insDesc').textContent='点右上角菜单 →「添加到主屏幕」';
+  }
+  setTimeout(function(){ bar.classList.add('on'); },1500);
+  $('#insClose').addEventListener('click',function(){
+    bar.classList.remove('on'); LS.set(KEY,1);
+    setTimeout(function(){ bar.style.display='none'; },420);
+  });
+})();
+
+/* 启动 */
+renderHistory();
+probeBackend();
+setTimeout(function(){ healthCheck(); },150);
+var pre=LS.get('sd_last',null);
+if(pre&&isValidDomain(pre)){ $('#domainInput').value=pre; }
+
+/* 正常输入时记住最后一次 */
+$('#domainInput').addEventListener('change',function(){
+  var d=cleanDomain(this.value); if(isValidDomain(d)) LS.set('sd_last',d);
+});
+
+})();
+</script>
+</body>
+</html>
